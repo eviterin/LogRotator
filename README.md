@@ -1,5 +1,16 @@
 # LogRotator
-Enacts a [logrotate](https://linux.die.net/man/8/logrotate) policy for items defined inside config file.
+Enacts a [logrotate](https://linux.die.net/man/8/logrotate) policy for any set of files.
+The log rotation behavior can be set inside the `logpolicy.conf` file. 
+
+## Test
+```
+Creates a file.
+Enacts a 3MB threshold policy.
+Adds 2MB of data to the file, below threshold.
+Asserts file is not rotated.
+Adds 2MB of data to the file, above threshold.
+Asserts file is rotated.
+```
 
 ## How to Run
 Follow these steps to run the program:
@@ -7,11 +18,6 @@ Follow these steps to run the program:
 2. Execute the compiled JavaScript file: node LogRotate.test.js
 
 ## Expected Output
-this whole thing todo:
-
-The log rotation behavior is defined in the `logpolicy.conf` file. 
-
-You can find this file in the project directory:
 Upon successful execution, you should see the following output:
 ```
 Test: Creating log file...
