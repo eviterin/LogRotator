@@ -14,8 +14,12 @@ Asserts file is rotated.
 
 ## How to Run
 Follow these steps to run the program:
-1. Compile the TypeScript files: tsc *.ts
-2. Execute the compiled JavaScript file: node LogRotate.test.js
+
+```>``` ```npm install```
+
+```>``` ```tsc *.ts```
+
+```>``` ```node LogRotate.test.js```
 
 ## Expected Output
 Upon successful execution, you should see the following output:
