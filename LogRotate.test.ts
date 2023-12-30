@@ -21,27 +21,29 @@ async function e2eRotationTest() {
     // Append 2MB of data to "test.log"
     LogRotator.appendOneMBToFile(testFile);
     LogRotator.appendOneMBToFile(testFile);
-
     console.log('Test: Appended 2MB of data to test log.');
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Assert that the file is not rotated (size is still 2MB)
+    // Enact the 3MB policy
+    LogRotator.enactLogrotatePolicy();
+    // Give some time for logrotate to execute
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    // Assert that the file is not rotated (size is 2MB)
     const currentFileSize1 = fs.statSync(testFile).size;
     assert.strictEqual(currentFileSize1, 2 * 1024 * 1024, 'File was rotated prematurely.');
 
     // Append an additional 2MB of data to "test.log"
     LogRotator.appendOneMBToFile(testFile);
     LogRotator.appendOneMBToFile(testFile);
+    console.log('Test: Appended an additional 2MB of data to test log.');
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    console.log('Test: Appended an additional 2MB of data to test log.');
-
     // Enact the policy defined in "logpolicy.conf"
-    // Which rotates the test.log file if it is greater than 3MB
+    // Which rotates the test.log file (size is 4MB)
     LogRotator.enactLogrotatePolicy();
     console.log('Test: Logrotate policy enacted.');
     await new Promise(resolve => setTimeout(resolve, 5000));
-
 
     // Check if the file was rotated (size is reset to 0)
     const finalFileSize1 = fs.statSync(testFile).size;
