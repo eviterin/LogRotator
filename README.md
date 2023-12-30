@@ -7,7 +7,8 @@ Follow these steps to run the program:
 2. Execute the compiled JavaScript file: node LogRotate.test.js
 
 ## Expected Output
-todo:
+this whole thing todo:
+
 The log rotation behavior is defined in the `logpolicy.conf` file. 
 
 You can find this file in the project directory:
